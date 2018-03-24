@@ -4,23 +4,38 @@ const close = document.querySelector('.close');
 const restart = document.querySelectorAll('.restart');
 const deck = document.querySelector('.deck');
 const cards = document.querySelectorAll('.card');
+let stars = document.querySelectorAll('.fa-star');
 const time = document.querySelector('.time');
+let moveCount = document.querySelector('.moves');
 let openCards = [];
 
-// get new game deck with cards
+// get new game deck with shuffled cards, reset results
 function newGame() {
-	minutes = 0;
-	moves = 0;
-	seconds = 0;
-	starsCount = 3;
+	openCards=[];
 	deck.innerHTML = '';
+
+	minutes = 0;
+	seconds = 0;
+	moves = 0;
+
+	time.textContent = '00:00';
+	moveCount.textContent = moves;
+	starsCount = "three stars";
+
+	let starsArray = Array.from(stars);
+	for (star of starsArray){
+		star.style.display = "inline-block";
+	}
+
+
 	let cardsArray = Array.from(cards);
 	shuffle(cardsArray);
 	for (card of cardsArray) {
 		card.classList.value = ('card');
 		deck.appendChild(card);
 	}
-	timer();
+
+	deck.addEventListener('click', timer);
 }
 
 // shuffle function from http://stackoverflow.com/a/2450976
@@ -51,13 +66,17 @@ function addTime() {
 
 function timer() {
 	t = setInterval(addTime,1000);
+	deck.removeEventListener('click', timer);
 }
 
 // show clicked card
 function showCard(element) {
-	element.classList.add('open');
-	openCards.push(element);
-	moves++;
+	if (!(openCards.includes(element))) {
+		//alternative: if card's class is not open
+		element.classList.add('open');
+		openCards.push(element);
+		console.log(openCards);
+	}
 }
 
 // hide card when cards do not match
@@ -80,34 +99,29 @@ function matchCards(array) {
 				hideCard(card);
 			}
 		}
+		moves++;
 		openCards=[];
 	}
 }
 
 // function sets move counter and stars
-// if all cards are matched function opening modal in run
+// if all cards are matched function opening modal is run
 function checkScore(moves) {
-	let moveCount = document.querySelector('.moves');
-	let matched = document.querySelectorAll('.match');
-	let stars = document.querySelector('.stars');
-	let star = document.querySelector('li');
 
 	moveCount.textContent = moves;
 
 	switch (moves) {
+	case 12:
+		stars[0].style.display = "none"
+		starsCount = "2 stars";
+		break;
 	case 20:
-		stars.removeChild(star);
-		starsCount = 2;
-		break;
-	case 25:
-		stars.removeChild(star);
-		starsCount = 1;
-		break;
-	case 36:
-		stars.removeChild(star);
-		starsCount = 'zero';
+		stars[1].style.display = "none"
+		starsCount = "1 star";
 		break;
 	}
+
+	let matched = document.querySelectorAll('.match');
 
 	if (matched.length == 16) {
 		winModal();
@@ -122,7 +136,7 @@ function winModal() {
 	modal.style.display = 'block';
 	timeTaken.textContent = time.textContent;
 	movesDone.textContent = moves;
-	starsEarned.textContent = '*' + starsCount + ' stars' + '*';
+	starsEarned.textContent = '* ' + starsCount + ' *';
 	clearInterval(t);
 }
 
@@ -131,13 +145,13 @@ function closeModal() {
 	modal.style.display = 'none';
 }
 
-
 // event listeners
 deck.addEventListener('click', function(event) {
 	showCard(event.target);
 	matchCards(openCards);
 	checkScore(moves);
 });
+
 
 restart[0].addEventListener('click', function() {
 	clearInterval(t);
@@ -158,8 +172,7 @@ newGame();
 
 
 //TO DO
-// deklarowanie zmiennych
-// All application components are usable across modern desktop, tablet, and phone browsers.
+// variables declaring
 // Add CSS animations when cards are clicked, unsuccessfully matched, and successfully matched.
 // Add unique functionality beyond the minimum requirements (Implement a leaderboard, store game state using local storage, etc.)
 // Implement additional optimizations that improve the performance and user experience of the game (keyboard shortcuts for gameplay, etc).

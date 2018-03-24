@@ -38,10 +38,10 @@ h1 {
  */
 
 .deck {
-    width: 660px;
-    min-height: 680px;
+    width: 55%;
+    height: 100vh;
     background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
-    padding: 32px;
+    padding: 5%;
     border-radius: 10px;
     box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
     display: flex;
@@ -52,8 +52,8 @@ h1 {
 }
 
 .deck .card {
-    height: 125px;
-    width: 125px;
+    height: calc((100% - 10%) / 4);
+    width: calc((100% - 10%) / 4);
     background: #2e3d49;
     font-size: 0;
     color: #ffffff;
@@ -106,11 +106,6 @@ h1 {
     cursor: pointer;
 }
 
-.restart:hover {
-    cursor: pointer;
-    font-size: 1.5em;
-}
-
 /*
  * Winners modal
  */
@@ -140,10 +135,33 @@ h1 {
 
 .close {
     margin-left: auto;
-    font-size: 1.5em;
+    font-size: 1.8em;
 }
 
-.close:hover {
-    cursor: pointer;
-    font-size: 2em;
+@media screen and (max-width:950px) {
+
+    .deck {
+        width: 70%;
+        height: 90vh;
+    }
+
+}
+
+
+@media screen and (max-width:600px) {
+
+    .deck {
+        width: 80%;
+        height: 80vh;
+    }
+
+}
+
+@media screen and (max-width:480px) {
+
+    .deck {
+        width: 90%;
+        height: 70vh;
+    }
+
 }
