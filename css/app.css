@@ -17,7 +17,8 @@ body {
 }
 
 body {
-    background: #ffffff url('../img/geometry2.png'); /* Background pattern from Subtle Patterns */
+    background-color: #c9b6d8;
+    background-image: url("https://www.transparenttextures.com/patterns/light-wool.png");
     font-family: 'Coda', cursive;
 }
 
@@ -26,10 +27,10 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    color: #2c353f;
 }
 
 h1 {
-    font-family: 'Open Sans', sans-serif;
     font-weight: 300;
 }
 
@@ -40,10 +41,10 @@ h1 {
 .deck {
     width: 55%;
     height: 100vh;
-    background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
+    background: linear-gradient(160deg, #fff 0%, #aa7ecd 100%);
     padding: 5%;
     border-radius: 10px;
-    box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
+    box-shadow: 12px 15px 20px 0 #2c353f;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -51,59 +52,76 @@ h1 {
     margin: 0 0 3em;
 }
 
-.deck .card {
+.card {
     height: calc((100% - 10%) / 4);
     width: calc((100% - 10%) / 4);
-    background: #2e3d49;
+    background: #2c353f;
     font-size: 0;
-    color: #ffffff;
+    color: #2c353f;
     border-radius: 8px;
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
+    box-shadow: 5px 2px 20px 0 #2c353f;
+    transition: 0.6s ease-in-out;
 }
 
-.deck .card.open {
+.card.open {
     transform: rotateY(0);
-    background: #02b3e4;
+    background: #fff;
+    color: #aa7ecd ;
     font-size: 33px;
     cursor: default;
 }
 
 
-.deck .card.match {
+.card.match {
     cursor: default;
-    background: #02ccba;
+    background: #aa7ecd;
+    color: #2c353f;
     font-size: 33px;
 }
 
 /*
- * Styles for the Score Panel
+ * Styles for the Player Panel
  */
 
-.score-panel {
-    text-align: left;
-    width: 345px;
+.player-panel {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    width: 50%;
     margin-bottom: 10px;
 }
 
-.score-panel .stars {
+.stars {
     margin: 0;
-    padding: 0;
+    padding-right: 10px;
     display: inline-block;
     margin: 0 5px 0 0;
 }
 
-.score-panel .stars li {
+.stars li {
     list-style: none;
     display: inline-block;
 }
 
-.score-panel .restart {
-    float: right;
+.moves {
+    padding-right: 10px;
+}
+
+.time {
+    padding-right: 10px;
+}
+
+.restart {
     cursor: pointer;
+}
+
+.restart i {
+    padding: 10px;
 }
 
 /*
@@ -139,29 +157,23 @@ h1 {
 }
 
 @media screen and (max-width:950px) {
-
     .deck {
         width: 70%;
         height: 90vh;
     }
-
 }
 
 
 @media screen and (max-width:600px) {
-
     .deck {
         width: 80%;
         height: 80vh;
     }
-
 }
 
 @media screen and (max-width:480px) {
-
     .deck {
         width: 90%;
         height: 70vh;
     }
-
 }

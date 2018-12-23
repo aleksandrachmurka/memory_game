@@ -18,8 +18,8 @@ function newGame() {
 	seconds = 0;
 	moves = 0;
 
-	time.textContent = '00:00';
-	moveCount.textContent = moves;
+	time.textContent = 'Time 00:00';
+	moveCount.textContent = 'Moves ' + moves;
 	starsCount = "three stars";
 
 	let starsArray = Array.from(stars);
@@ -61,7 +61,7 @@ function addTime() {
 	    minutes++;
     }
 
-    time.textContent = (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" + (seconds > 9 ? seconds : "0" + seconds);
+    time.textContent = 'Time ' + (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" + (seconds > 9 ? seconds : "0" + seconds);
 }
 
 function timer() {
@@ -75,7 +75,6 @@ function showCard(element) {
 		//alternative: if card's class is not open
 		element.classList.add('open');
 		openCards.push(element);
-		console.log(openCards);
 	}
 }
 
@@ -108,7 +107,7 @@ function matchCards(array) {
 // if all cards are matched function opening modal is run
 function checkScore(moves) {
 
-	moveCount.textContent = moves;
+	moveCount.textContent = 'Moves ' + moves;
 
 	switch (moves) {
 	case 12:
