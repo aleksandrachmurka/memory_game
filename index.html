@@ -10,8 +10,9 @@
 </head>
 <body>
 	<div class="container">
-
-    	<h1>Memory Game</h1>
+		<header>
+    		<h1>Memory Game</h1>
+    	</header>
 
         <div class="player-panel">
         	<div class="results">
@@ -21,9 +22,9 @@
 	        		<li><i class="fa fa-star"></i></li>
 	        	</ul>
 
-	        	<span class="moves">Moves 0</span>
+	        	Moves <span class="moves"> 0</span>
 
-				<span class="time">Time 00:00</span>
+				Time <span class="time">00:00</span>
 			</div>
             <div class="restart">
         		<i class="fa fa-repeat"></i><span>Restart</span>
@@ -85,15 +86,27 @@
     <div class="modal">
 		<div class="modal-content">
     		<span class="close">&times;</span>
-    		<p>Congratulations!</p>
-    		<p>Time taken: <span class="timeTaken"></span></p>
+    		<p>Congratulations! It took you:</p>
+    		<p><span class="timeTaken"></span></p>
     		<p>Moves: <span class="movesDone"></span></p>
     		<p>Earned: <span class="starsEarned"></span></p>
     		<div class="restart">
         		<p>Play again <i class="fa fa-repeat"></i></p>
         	</div>
+        	<div class="score-table">
+        		<p>Top 10 scores</p>
+        		<table>
+        			<tr>
+        				<th>Player</th>
+        				<th>Date</th>
+        				<th>Moves</th>
+        				<th>Time</th>
+        			</tr>
+        		</table>
+        	</div>
   		</div>
 	</div>
+
 
     <script src="js/app.js"></script>
 </body>

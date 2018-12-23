@@ -7,26 +7,25 @@ const cards = document.querySelectorAll('.card');
 let stars = document.querySelectorAll('.fa-star');
 const time = document.querySelector('.time');
 let moveCount = document.querySelector('.moves');
+let player = null;
 let openCards = [];
+let results = [];
 
 // get new game deck with shuffled cards, reset results
 function newGame() {
-	openCards=[];
+	player = prompt('Please enter your name');
 	deck.innerHTML = '';
 
 	minutes = 0;
 	seconds = 0;
 	moves = 0;
 
-	time.textContent = 'Time 00:00';
-	moveCount.textContent = 'Moves ' + moves;
 	starsCount = "three stars";
 
 	let starsArray = Array.from(stars);
 	for (star of starsArray){
 		star.style.display = "inline-block";
 	}
-
 
 	let cardsArray = Array.from(cards);
 	shuffle(cardsArray);
@@ -61,7 +60,7 @@ function addTime() {
 	    minutes++;
     }
 
-    time.textContent = 'Time ' + (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" + (seconds > 9 ? seconds : "0" + seconds);
+    time.textContent = (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" + (seconds > 9 ? seconds : "0" + seconds);
 }
 
 function timer() {
@@ -104,10 +103,10 @@ function matchCards(array) {
 }
 
 // function sets move counter and stars
-// if all cards are matched function opening modal is run
+// if all cards are matched function winners modal is run
 function checkScore(moves) {
 
-	moveCount.textContent = 'Moves ' + moves;
+	moveCount.textContent = moves;
 
 	switch (moves) {
 	case 12:
@@ -120,9 +119,13 @@ function checkScore(moves) {
 		break;
 	}
 
-	let matched = document.querySelectorAll('.match');
+	const matched = document.querySelectorAll('.match');
 
 	if (matched.length == 16) {
+		let date = new Date;
+		let result = [player, date.toLocaleDateString(), moves, time.textContent];
+		results.push(result);
+		localStorage.setItem('results', JSON.stringify(results));
 		winModal();
 	}
 }
@@ -137,6 +140,8 @@ function winModal() {
 	movesDone.textContent = moves;
 	starsEarned.textContent = '* ' + starsCount + ' *';
 	clearInterval(t);
+	let storedResults = JSON.parse(localStorage.getItem('results'));
+	console.log(results);
 }
 
 //hide modal with stats
@@ -171,13 +176,6 @@ newGame();
 
 
 //TO DO
-// variables declaring
-// Add CSS animations when cards are clicked, unsuccessfully matched, and successfully matched.
 // Add unique functionality beyond the minimum requirements (Implement a leaderboard, store game state using local storage, etc.)
 // Implement additional optimizations that improve the performance and user experience of the game (keyboard shortcuts for gameplay, etc).
 // zbudować karty każdy src obrazka po 2 razy i rozmieścić randomowo - css grid
-// do wyboru ilość kart 3x3, 5x5
-
-
-
-
