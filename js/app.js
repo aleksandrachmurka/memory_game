@@ -4,12 +4,12 @@ const close = document.querySelector('.close');
 const restart = document.querySelectorAll('.restart');
 const deck = document.querySelector('.deck');
 const cards = document.querySelectorAll('.card');
-let stars = document.querySelectorAll('.fa-star');
+const stars = document.querySelectorAll('.fa-star');
 const time = document.querySelector('.time');
 let moveCount = document.querySelector('.moves');
 let player = null;
 let openCards = [];
-let results = [];
+let results = JSON.parse(localStorage.getItem('results'));
 
 // get new game deck with shuffled cards, reset results
 function newGame() {
@@ -39,7 +39,7 @@ function newGame() {
 
 // shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
+    let currentIndex = array.length, temporaryValue, randomIndex;
 
     while (currentIndex !== 0) {
         randomIndex = Math.floor(Math.random() * currentIndex);
@@ -126,8 +126,31 @@ function checkScore(moves) {
 		let result = [player, date.toLocaleDateString(), moves, time.textContent];
 		results.push(result);
 		localStorage.setItem('results', JSON.stringify(results));
+		scoresTable()
 		winModal();
 	}
+}
+
+// create table with tops scores
+function scoresTable() {
+	let table = document.querySelector('table');
+	let row;
+	let data;
+	results = JSON.parse(localStorage.getItem('results'));
+	let topFive = results.sort(function(x,y){
+		return x[2] < y [2] ? -1 : 1;
+	}).slice(0, 5);
+
+	topFive.forEach(function(result){
+		row = document.createElement('tr');
+		row.classList.add('result');
+		result.forEach(function (element){
+			data = document.createElement('td');
+			data.textContent = element;
+			row.appendChild(data)
+		});
+		table.appendChild(row);
+	});
 }
 
 //shows modal with stats
@@ -140,8 +163,7 @@ function winModal() {
 	movesDone.textContent = moves;
 	starsEarned.textContent = '* ' + starsCount + ' *';
 	clearInterval(t);
-	let storedResults = JSON.parse(localStorage.getItem('results'));
-	console.log(results);
+
 }
 
 //hide modal with stats
@@ -173,7 +195,6 @@ close.addEventListener('click', closeModal);
 
 // let's play!
 newGame();
-
 
 //TO DO
 // Add unique functionality beyond the minimum requirements (Implement a leaderboard, store game state using local storage, etc.)

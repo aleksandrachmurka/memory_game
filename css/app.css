@@ -34,9 +34,8 @@ h1 {
     font-weight: 300;
 }
 
-/*
- * Styles for the deck of cards
- */
+/* Deck of cards */
+
 
 .deck {
     width: 55%;
@@ -83,9 +82,8 @@ h1 {
     font-size: 33px;
 }
 
-/*
- * Styles for the Player Panel
- */
+/* Player Panel */
+
 
 .player-panel {
     display: flex;
@@ -124,9 +122,8 @@ h1 {
     padding: 10px;
 }
 
-/*
- * Winners modal
- */
+/* Winners Modal*/
+
 
  .modal {
     display: none;
@@ -155,6 +152,9 @@ h1 {
     margin-left: auto;
     font-size: 1.8em;
 }
+
+
+/* Media queries*/
 
 @media screen and (max-width:950px) {
     .deck {
