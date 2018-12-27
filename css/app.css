@@ -126,7 +126,7 @@ h1 {
 
 
  .modal {
-    display: none;
+    display: block;
     top: 0;
     left: 0;
     position: fixed;
@@ -153,6 +153,16 @@ h1 {
     font-size: 1.8em;
 }
 
+.top-scores p {
+    font-weight: bold;
+    text-align: center;
+}
+
+th {
+    font-weight: normal;
+    padding: 10px;
+}
+
 
 /* Media queries*/
 
@@ -163,6 +173,13 @@ h1 {
     }
 }
 
+
+@media screen and (max-width:750px) {
+    .player-panel {
+        width: 80%;
+        justify-content: space-around;
+    }
+}
 
 @media screen and (max-width:600px) {
     .deck {
@@ -175,5 +192,9 @@ h1 {
     .deck {
         width: 90%;
         height: 70vh;
+    }
+
+    .player-panel {
+        flex-direction: column;
     }
 }

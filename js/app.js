@@ -134,6 +134,7 @@ function checkScore(moves) {
 // create table with tops scores
 function scoresTable() {
 	let table = document.querySelector('table');
+	// let addedResults = document.querySelector('table');
 	let row;
 	let data;
 	results = JSON.parse(localStorage.getItem('results'));
