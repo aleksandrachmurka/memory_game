@@ -132,6 +132,9 @@ function checkScore(moves) {
 	if (matched.length == 16) {
 		let date = new Date;
 		let result = [player, date.toLocaleDateString(), moves, time.textContent];
+		if (!results || results === null) {
+			results = []
+		}
 		results.push(result);
 		localStorage.setItem('results', JSON.stringify(results));
 		scoresTable();
