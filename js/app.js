@@ -7,9 +7,9 @@ const cards = document.querySelectorAll('.card');
 const stars = document.querySelectorAll('.fa-star');
 const time = document.querySelector('.time');
 let moveCount = document.querySelector('.moves');
+let results = JSON.parse(localStorage.getItem('results'));
 let player = null;
 let openCards = [];
-let results = JSON.parse(localStorage.getItem('results'));
 
 // get new game deck with shuffled cards, reset results table
 function newGame() {
@@ -130,11 +130,11 @@ function checkScore(moves) {
 	const matched = document.querySelectorAll('.match');
 
 	if (matched.length == 16) {
+		if (!results || results === null) {
+			results = [];
+		}
 		let date = new Date;
 		let result = [player, date.toLocaleDateString(), moves, time.textContent];
-		if (!results || results === null) {
-			results = []
-		}
 		results.push(result);
 		localStorage.setItem('results', JSON.stringify(results));
 		scoresTable();
@@ -147,7 +147,7 @@ function scoresTable() {
 	let table = document.querySelector('table');
 	let row;
 	let data;
-	results = JSON.parse(localStorage.getItem('results'));
+
 	let topFive = results.sort(function(x,y){
 		return x[2] < y [2] ? -1 : 1;
 	}).slice(0, 5);
