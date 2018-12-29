@@ -11,16 +11,24 @@ let player = null;
 let openCards = [];
 let results = JSON.parse(localStorage.getItem('results'));
 
-// get new game deck with shuffled cards, reset results
+// get new game deck with shuffled cards, reset results table
 function newGame() {
-	player = prompt('Please enter your name');
 	deck.innerHTML = '';
 
 	minutes = 0;
 	seconds = 0;
+	time.textContent ='00:00';
+
 	moves = 0;
+	moveCount.textContent = '0';
 
 	starsCount = "three stars";
+
+	player = prompt('Please enter your name');
+
+	const table = document.querySelector('table');
+	let addedResults = table.querySelectorAll('.result');
+	addedResults.forEach(result=> result.remove());
 
 	let starsArray = Array.from(stars);
 	for (star of starsArray){
@@ -126,7 +134,7 @@ function checkScore(moves) {
 		let result = [player, date.toLocaleDateString(), moves, time.textContent];
 		results.push(result);
 		localStorage.setItem('results', JSON.stringify(results));
-		scoresTable()
+		scoresTable();
 		winModal();
 	}
 }
@@ -134,7 +142,6 @@ function checkScore(moves) {
 // create table with tops scores
 function scoresTable() {
 	let table = document.querySelector('table');
-	// let addedResults = document.querySelector('table');
 	let row;
 	let data;
 	results = JSON.parse(localStorage.getItem('results'));
@@ -164,7 +171,6 @@ function winModal() {
 	movesDone.textContent = moves;
 	starsEarned.textContent = '* ' + starsCount + ' *';
 	clearInterval(t);
-
 }
 
 //hide modal with stats
@@ -193,11 +199,9 @@ restart[1].addEventListener('click', function() {
 
 close.addEventListener('click', closeModal);
 
-
-// let's play!
+// start
 newGame();
 
 //TO DO
-// Add unique functionality beyond the minimum requirements (Implement a leaderboard, store game state using local storage, etc.)
 // Implement additional optimizations that improve the performance and user experience of the game (keyboard shortcuts for gameplay, etc).
 // zbudować karty każdy src obrazka po 2 razy i rozmieścić randomowo - css grid

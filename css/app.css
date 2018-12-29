@@ -36,7 +36,6 @@ h1 {
 
 /* Deck of cards */
 
-
 .deck {
     width: 55%;
     height: 100vh;
@@ -84,7 +83,6 @@ h1 {
 
 /* Player Panel */
 
-
 .player-panel {
     display: flex;
     justify-content: space-between;
@@ -122,11 +120,10 @@ h1 {
     padding: 10px;
 }
 
-/* Winners Modal*/
-
+/* Stats Modal*/
 
  .modal {
-    display: block;
+    display: none;
     top: 0;
     left: 0;
     position: fixed;
