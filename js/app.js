@@ -188,7 +188,6 @@ deck.addEventListener('click', function(event) {
 	checkScore(moves);
 });
 
-
 restart[0].addEventListener('click', function() {
 	clearInterval(t);
 	newGame();
@@ -204,7 +203,3 @@ close.addEventListener('click', closeModal);
 
 // start
 newGame();
-
-//TO DO
-// Implement additional optimizations that improve the performance and user experience of the game (keyboard shortcuts for gameplay, etc).
-// zbudować karty każdy src obrazka po 2 razy i rozmieścić randomowo - css grid
