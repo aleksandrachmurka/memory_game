@@ -6,27 +6,31 @@ const deck = document.querySelector('.deck');
 const cards = document.querySelectorAll('.card');
 const stars = document.querySelectorAll('.fa-star');
 const time = document.querySelector('.time');
-let moveCount = document.querySelector('.moves');
+const table = document.querySelector('table');
+const moveCount = document.querySelector('.moves');
+
 let results = JSON.parse(localStorage.getItem('results'));
-let player = null;
+
+let player;
+let minutes;
+let seconds;
+let moves;
+let starsCount;
 let openCards = [];
 
-// get new game deck with shuffled cards, reset results table
+// get new game deck with shuffled cards, reset stats and results table
 function newGame() {
-	deck.innerHTML = '';
-
+	player = null;
 	minutes = 0;
 	seconds = 0;
-	time.textContent ='00:00';
-
 	moves = 0;
+	starsCount = "three stars"
+
+	deck.innerHTML = '';
+	time.textContent ='00:00';
 	moveCount.textContent = '0';
-
-	starsCount = "three stars";
-
 	player = prompt('Please enter your name');
 
-	const table = document.querySelector('table');
 	let addedResults = table.querySelectorAll('.result');
 	addedResults.forEach(result=> result.remove());
 
@@ -60,7 +64,6 @@ function shuffle(array) {
     return array;
 }
 
-//timer function from https://jsfiddle.net/Daniel_Hug/pvk6p/
 function addTime() {
 	seconds++;
 	if (seconds >= 60) {
@@ -79,7 +82,6 @@ function timer() {
 // show clicked card
 function showCard(element) {
 	if (!(openCards.includes(element))) {
-		//alternative: if card's class is not open
 		element.classList.add('open');
 		openCards.push(element);
 	}
@@ -113,7 +115,6 @@ function matchCards(array) {
 // function sets move counter and stars
 // if all cards are matched function winners modal is run
 function checkScore(moves) {
-
 	moveCount.textContent = moves;
 
 	switch (moves) {
@@ -133,6 +134,7 @@ function checkScore(moves) {
 		if (!results || results === null) {
 			results = [];
 		}
+
 		let date = new Date;
 		let result = [player, date.toLocaleDateString(), moves, time.textContent];
 		results.push(result);
@@ -144,7 +146,6 @@ function checkScore(moves) {
 
 // create table with tops scores
 function scoresTable() {
-	let table = document.querySelector('table');
 	let row;
 	let data;
 
