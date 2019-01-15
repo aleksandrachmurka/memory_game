@@ -3,7 +3,7 @@
 Udacity Front End Web Developer Nanodegree Project
 
 ## View it here
-https://aleksandrachmurka.github.io/memory-game/
+https://aleksandrachmurka.github.io/memory_game/
 
 ## Instructions
 Game starts with deck of cards ready to play.There are two cards with the same symbol.\
